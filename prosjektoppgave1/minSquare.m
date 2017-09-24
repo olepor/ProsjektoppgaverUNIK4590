@@ -16,8 +16,8 @@ a = (Y.'*Y)\Y.'*b;
 g = a.'*Y.'; % Do all the classifications in one go
 
 C1 = zeros(2,1);
-class1 = find(g>=0)
-class2 = find(g<0)
+class1 = find(g>=0);
+class2 = find(g<0);
 
 % misclassifications of class one
 C1(2) = length(class1(class1 > length(tr_data1)));
