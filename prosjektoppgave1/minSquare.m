@@ -1,6 +1,6 @@
-function [] = minSquare()
+function [C] = minSquare(tr_data1, tr_data2, test_data1, test_data2)
 
-[tr_data1, tr_data2, test_data1, test_data2] = datasets('ds-1.txt');
+% [tr_data1, tr_data2, test_data1, test_data2] = datasets('ds-1.txt');
 
 tr_data = [tr_data1 tr_data2]; % Concatenate the training data into one vector
 test_data = [test_data1 test_data2]; % ditto
@@ -28,6 +28,6 @@ C2 = zeros(2,1);
 C2(1) = length(class2(class2 < length(tr_data1)));
 C2(2) = length(tr_data2) - C2(1);
 
-C = [C1 C2]
+C = [C1 C2];
 
 

@@ -1,7 +1,7 @@
-function [C] = minErrorRateClassifier()
+function [C] = minErrorRateClassifier(tr_data1, tr_data2, test_data1, test_data2)
 % TODO - take in the datafile, and output -- what?
 
-[tr_data1, tr_data2, test_data1, test_data2] = datasets('ds-1.txt'); % class1 and 2 training data
+% [tr_data1, tr_data2, test_data1, test_data2] = datasets('ds-1.txt'); % class1 and 2 training data
 
 mu_exp1 = (sum(tr_data1.')/length(tr_data1)).'; % returns the sum as a column vector
 mu_exp2 = (sum(tr_data2.')/length(tr_data2)).';
@@ -33,7 +33,6 @@ g2x = @(x) x.'*W2*x + w2.'*x + w20;
 
 C1 = zeros(2,1);
 for i = 1:length(test_data1)
-
     if g1x(test_data1(:,i)) - g2x(test_data1(:,i)) > 0
         C1(1) = C1(1) + 1;
     else
