@@ -1,6 +1,7 @@
-clear all;
+function [] = permutecharacteristics(filename)
+    
 errors = zeros(3,1);
-[tr_data1, tr_data2, test_data1, test_data2] = datasets('ds-2.txt');
+[tr_data1, tr_data2, test_data1, test_data2] = datasets(filename);
 
 tr_data = [tr_data1 tr_data2];
 test_data = [test_data1 test_data2];
@@ -40,18 +41,25 @@ for i = 1:nCharacteristics
     test_data1i = test_data1(bestperm,:);
     test_data2i = test_data2(bestperm,:);
     NNE = errorRate(nearestNeighbour(tr_data1i, tr_data2i, test_data1i, test_data2i));
-    fprintf(string('mse\n'))
     MSE = errorRate(minSquare(tr_data1i, tr_data2i, test_data1i, test_data2i));
-    MERE = errorRate(minErrorRateClassifier(tr_data1i, ...
+    MECE = errorRate(minErrorRateClassifier(tr_data1i, ...
                                                       tr_data2i, test_data1i, ...
                                                       test_data2i));
+    fprintf('the best permutation vectors:')
+    bestperm
     NN = nearestNeighbour(tr_data1i, tr_data2i, test_data1i, test_data2i)
+    NNE
     MS = minSquare(tr_data1i, tr_data2i, test_data1i, test_data2i)
+    MSE
     MEC = minErrorRateClassifier(tr_data1i, ...
                                                       tr_data2i, test_data1i, ...
                                                       test_data2i)
-    errors = [errors [MERE; MSE; NNE]]
-    [M I] = min([NNE MSE MERE]);
+    MECE
+    % errors = [errors [NNE; MSE; MERE]]
+    % errors(:,2:end)
+    % fprintf('errors:')
+    % errors(:,end-1)
+    [M I] = min([NNE MSE MECE]);
     classifiers = [string('nearest neighbour'), string('min square error'), string('min error rate classifier')];
     fprintf('the best classifier for dimension %d is %s\n', i, classifiers(I));
 end
