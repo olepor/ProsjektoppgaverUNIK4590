@@ -3,8 +3,30 @@
 
 \usepackage[utf8]{inputenc}
 
-\begin{document}
+\title{Prosjektoppgave2 UNIK4590 - h\o st 2017}
+\author{Ole Petter Orhagen}
+\date{\today}
 
-hello
+\begin{document}
+\maketitle
+\newpage
+
+\section*{Bruksanvisning}
+Hele oppgaven er i utgangspunktet l\o st i fila \emph{oppg2.m} i kode mappa.
+kj\o r denne fila i matlab, og velg ut de tre regionene du vil klassifisere
+etter, og ta deg en kopp kaffe (klassifiseringene tar litt tid). S\aa\ vil kj\o re klassifikatoren p\aa\ treningsbildet \emph{bilde2}, og
+p\aa\ \emph{bilde3} for \aa\ klassifisere noe som ikke er et treningsbilde.
+(P.S: bildet der man velger ut de tre regionene man vil klassifisere etter
+lukker seg ikke selv, og m\aa\ derfor lukkes manuelt for at programmet skal
+fortsette \aa\ kj\o re. Det er ogs\aa\ per n\aa\ kun mulighet til \aa\ velge tre
+regioner \aa\ klassifisere etter.)
+
+\section*{Oppsummering}
+Klassifikatoren ser ut til \aa\ fungere ganske godt, bortsett fra at m\o rke
+regioner fort blir klassifisert til bl\aa tt, og lysere udefinerte regioner blir
+klassifisert til gulvet. Dette er fordi vi kun har tra klassifikatorer \aa\
+legge et piksel i. Vi kunne for eksempel satt en \emph{sikkerhetsmargin} ved \aa\ for
+eksempel ha en \emph{troverdighet} p\aa\ hver klassifisering, og dermed, dersom
+ingen av klassifikatorene var sikre nok, s\aa\ vil vi klassifisere den som uklassifisert.
 
 \end{document}
