@@ -3,11 +3,24 @@ clear all
 
 [A, CMap] = imread('../bilder/Bilde2.png');
 
-imagesc(A);
+im = imshow(A)
+axis on
+tbluecoor = int16(getrect)
+tredcoor = int16(getrect)
+tfloorcoor = int16(getrect)
+
 
 A = double(A);
+fprintf('sizes of trDataX')
 
-A(1,1,:)
+[x y] = getxy(tbluecoor)
+trDataBlue = A(y(1):y(2), x(1):x(2), :);
+[x y] = getxy(tredcoor)
+trDataRed = A(y(1):y(2), x(1):x(2), :);
+[x y] = getxy(tfloorcoor)
+trDataFloor = A(y(1):y(2), x(1):x(2), :);
+
+% A(1,1,:)
 % Normalize the values RGB
 % A = normalizeMatrix(A);
 
@@ -19,24 +32,24 @@ size(A)
 
 % Select the traning-data regions from the photo
 % From Picture-2 we choose blue region ((300, 370),(460,370))
-trDataBlue = A(350:550, 350:550, :);
 % trDataRed = trainingRectangle(A, [820; 270], [960; 270]);
 % trDataFloor = trainingRectangle(A, [700; 580], [1000; 580]);
 % size(trDataBlue)
 
 % flatten the matrix to a column vector of RGB-values
-S = size(trDataBlue)
 
-% TODO - use imread('picture', 'PixelRegion', {[x,y], [x,y]})
+S = size(trDataBlue);
 trDataBlue = reshape(trDataBlue, [S(1)*S(2), S(3)])';
-trDataRed = A(210:310, 810:950, :);
+fprintf('size trDataBlue')
+size(trDataBlue)
 S = size(trDataRed);
 trDataRed = reshape(trDataRed, [S(1)*S(2), S(3)])';
+fprintf('size trDataRed')
 size(trDataRed)
 
-trDataFloor = A(600:700, 750:850, :);
 S = size(trDataFloor);
 trDataFloor = reshape(trDataFloor, [S(1)*S(2), S(3)])';
+fprintf('size trDataFloor')
 size(trDataFloor)
 
 % the classifiers for the three states
@@ -67,4 +80,7 @@ for x = 1:length(A(1,:,:))
     end
 end
 
-imagesc(B);
+figure
+imshow(B)
+title('the classified picture');
+fprintf('Done\n')
